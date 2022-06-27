@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kafka
+  namespace: argocd
+spec:
+  destination:
+    namespace: kafka
+    server: https://kubernetes.default.svc
+  project: kafka
+  source:
+    path: argocd/manifests/kafka
+    repoURL: https://github.com/piomin/sample-terraform-kubernetes-argocd.git
+    targetRevision: HEAD
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
