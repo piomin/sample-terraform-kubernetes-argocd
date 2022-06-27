@@ -16,17 +16,17 @@ $ git clone https://github.com/piomin/sample-terraform-kubernetes-argocd.git
 $ cd sample-terraform-kubernetes-argocd
 ```
 
-Then initialize Terraform config: \
+Then initialize Terraform config: 
 ```shell
 terraform init
 ```
 
-Review the actions plan: \
+Review the actions plan: 
 ```shell
 terraform plan
 ```
 
-Run the Terraform actions: \
+Run the Terraform actions: 
 ```shell
 terraform apply
 ```
