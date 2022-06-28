@@ -8,7 +8,7 @@ In this project I'm demonstrating you how to use [Terraform](https://www.terrafo
 
 ## Getting Started
 
-You may the detailed explanation of that example repository in the following article: will be published soon...
+You may the detailed explanation of that example repository in the following article: [Manage Kubernetes Cluster with Terraform and Argo CD](https://piotrminkowski.com/2022/06/28/manage-kubernetes-cluster-with-terraform-and-argo-cd/)
 
 First, clone that repo:
 ```shell
