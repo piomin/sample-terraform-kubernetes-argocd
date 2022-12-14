@@ -5,7 +5,7 @@ applications:
    source:
      repoURL: https://github.com/piomin/openshift-cluster-config.git
      targetRevision: HEAD
-     path: apps/simple
+     path: apps/simple-with-secret
    destination:
      server: https://kubernetes.default.svc
      namespace: demo-1
@@ -21,7 +21,7 @@ applications:
    source:
      repoURL: https://github.com/piomin/openshift-cluster-config.git
      targetRevision: HEAD
-     path: apps/simple
+     path: apps/simple-with-secret
    destination:
      server: https://kubernetes.default.svc
      namespace: demo-2
