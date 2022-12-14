@@ -1,0 +1,33 @@
+applications:
+ - name: sample-app-1
+   namespace: argocd
+   project: default
+   source:
+     repoURL: https://github.com/piomin/openshift-cluster-config.git
+     targetRevision: HEAD
+     path: apps/simple
+   destination:
+     server: https://kubernetes.default.svc
+     namespace: demo-1
+   syncPolicy:
+     automated:
+       prune: false
+       selfHeal: false
+     syncOptions:
+      - CreateNamespace=true
+ - name: sample-app-2
+   namespace: argocd
+   project: default
+   source:
+     repoURL: https://github.com/piomin/openshift-cluster-config.git
+     targetRevision: HEAD
+     path: apps/simple
+   destination:
+     server: https://kubernetes.default.svc
+     namespace: demo-2
+   syncPolicy:
+     automated:
+       prune: false
+       selfHeal: false
+     syncOptions:
+       - CreateNamespace=true
