@@ -42,10 +42,10 @@ resource "kind_cluster" "default" {
 }
 
 provider "kubectl" {
-  host = "${kind_cluster.default.endpoint}"
-  cluster_ca_certificate = "${kind_cluster.default.cluster_ca_certificate}"
-  client_certificate = "${kind_cluster.default.client_certificate}"
-  client_key = "${kind_cluster.default.client_key}"
+  host = kind_cluster.default.endpoint
+  cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
+  client_certificate = kind_cluster.default.client_certificate
+  client_key = kind_cluster.default.client_key
 }
 
 data "kubectl_file_documents" "crds" {
@@ -71,10 +71,10 @@ resource "kubectl_manifest" "olm_apply" {
 
 provider "helm" {
   kubernetes {
-    host = "${kind_cluster.default.endpoint}"
-    cluster_ca_certificate = "${kind_cluster.default.cluster_ca_certificate}"
-    client_certificate = "${kind_cluster.default.client_certificate}"
-    client_key = "${kind_cluster.default.client_key}"
+    host = kind_cluster.default.endpoint
+    cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
+    client_certificate = kind_cluster.default.client_certificate
+    client_key = kind_cluster.default.client_key
   }
 }
 
