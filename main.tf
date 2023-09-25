@@ -2,11 +2,11 @@ terraform {
   required_providers {
     kind = {
       source = "tehcyx/kind"
-      version = "0.0.12"
+      version = "0.2.1"
     }
     kubectl = {
       source  = "gavinbunney/kubectl"
-      version = ">= 1.7.0"
+      version = "1.14.0"
     }
   }
 }
@@ -22,21 +22,29 @@ resource "kind_cluster" "default" {
 
     node {
       role = "control-plane"
+      extra_port_mappings {
+        container_port = 80
+        host_port      = 80
+      }
+      extra_port_mappings {
+        container_port = 443
+        host_port      = 443
+      }
     }
 
     node {
       role = "worker"
-      image = "kindest/node:v1.23.4"
+      image = "kindest/node:v1.27.1"
     }
 
     node {
       role = "worker"
-      image = "kindest/node:v1.23.4"
+      image = "kindest/node:v1.27.1"
     }
 
     node {
       role = "worker"
-      image = "kindest/node:v1.23.4"
+      image = "kindest/node:v1.27.1"
     }
   }
 }
@@ -64,8 +72,20 @@ data "kubectl_file_documents" "olm" {
 }
 
 resource "kubectl_manifest" "olm_apply" {
-  depends_on = [data.kubectl_file_documents.crds]
+  depends_on = [kubectl_manifest.crds_apply]
   for_each  = data.kubectl_file_documents.olm.manifests
+  wait = true
+  yaml_body = each.value
+}
+
+data "kubectl_file_documents" "final" {
+  content = file("olm/final.yaml")
+}
+
+resource "kubectl_manifest" "final_apply" {
+  depends_on = [kubectl_manifest.olm_apply]
+  for_each  = data.kubectl_file_documents.final.manifests
+  wait = true
   yaml_body = each.value
 }
 
