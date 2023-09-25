@@ -1,5 +1,8 @@
 # Manage Kubernetes Cluster with Terraform and Argo CD [![Twitter](https://img.shields.io/twitter/follow/piotr_minkowski.svg?style=social&logo=twitter&label=Follow%20Me)](https://twitter.com/piotr_minkowski)
 
+
+[![CircleCI](https://circleci.com/gh/piomin/sample-terraform-kubernetes-argocd.svg?style=svg)](https://circleci.com/gh/piomin/sample-terraform-kubernetes-argocd)
+
 In this project I'm demonstrating you how to use [Terraform](https://www.terraform.io/) together with [Argo CD](https://argo-cd.readthedocs.io/en/stable/) to create and manage the Kubernetes cluster on [Kind](https://kind.sigs.k8s.io/).
 
 ## Prerequisites
