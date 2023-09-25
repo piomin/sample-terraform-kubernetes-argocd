@@ -1,0 +1,33 @@
+version: 2.1
+
+executors:
+  machine_executor_amd64:
+    machine:
+      image: ubuntu-2204:2022.04.2
+    environment:
+      architecture: "amd64"
+      platform: "linux/amd64"
+
+orbs:
+  terraform: circleci/terraform@3.1
+
+jobs:
+  deploy-k8s:
+    executor: machine_executor_amd64
+    steps:
+      - checkout
+      - terraform/init:
+          path: .
+      - terraform/validate:
+          path: .
+      - terraform/plan:
+          path: .
+      - terraform/apply:
+          path: .
+      - terraform/destroy:
+          path: .
+
+workflows:
+  terratest:
+    jobs:
+      - deploy-k8s
