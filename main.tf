@@ -122,7 +122,7 @@ resource "helm_release" "argocd-apps" {
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argocd-apps"
   namespace        = "argocd"
-  version          = "1.2.0"
+  version          = "1.4.1"
 
   values = [
     file("argocd/application.yaml")
