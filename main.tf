@@ -14,7 +14,7 @@ terraform {
 provider "kind" {}
 
 resource "kind_cluster" "default" {
-  name = "cluster-1"
+  name = var.cluster_name
   wait_for_ready = true
   kind_config {
     kind = "Cluster"
@@ -98,8 +98,15 @@ provider "helm" {
   }
 }
 
+resource "time_sleep" "wait_150_seconds" {
+  depends_on = [kubectl_manifest.final_apply]
+
+  create_duration = "150s"
+}
+
 resource "helm_release" "argocd" {
   name  = "argocd"
+  depends_on = [time_sleep.wait_150_seconds]
 
   repository       = "https://argoproj.github.io/argo-helm"
   chart            = "argo-cd"

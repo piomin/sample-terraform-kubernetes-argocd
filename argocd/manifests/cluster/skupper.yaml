@@ -1,0 +1,23 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: CatalogSource
+metadata:
+  name: skupper-operator
+  namespace: olm
+spec:
+  grpcPodConfig:
+    securityContextConfig: restricted
+  image: quay.io/skupper/skupper-operator-index:v1.4.3
+  sourceType: grpc
+---
+apiVersion: operators.coreos.com/v1alpha1
+kind: Subscription
+metadata:
+  name: skupper-operator
+  namespace: operators
+spec:
+  channel: alpha
+  installPlanApproval: Automatic
+  name: skupper-operator
+  source: skupper-operator
+  sourceNamespace: olm
+  startingCSV: skupper-operator.v1.4.3
