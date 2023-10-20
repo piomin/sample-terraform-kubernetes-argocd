@@ -4,8 +4,6 @@ metadata:
   name: skupper-operator
   namespace: olm
 spec:
-  grpcPodConfig:
-    securityContextConfig: restricted
   image: quay.io/skupper/skupper-operator-index:v1.4.3
   sourceType: grpc
 ---
