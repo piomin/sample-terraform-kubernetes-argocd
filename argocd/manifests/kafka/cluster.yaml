@@ -5,7 +5,7 @@ metadata:
 spec:
   kafka:
     replicas: 3
-    version: 3.2.0
+    version: 3.6.0
     logging:
       type: inline
       loggers:
