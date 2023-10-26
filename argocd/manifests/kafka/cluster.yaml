@@ -29,7 +29,7 @@ spec:
         tls: true
     storage:
       type: persistent-claim
-      size: 5Gi
+      size: 10Gi
       deleteClaim: true
   zookeeper:
     replicas: 3
