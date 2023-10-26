@@ -5,7 +5,7 @@ metadata:
 spec:
   kafka:
     replicas: 3
-    version: 3.6.0
+    version: 3.5.0
     logging:
       type: inline
       loggers:
@@ -17,7 +17,7 @@ spec:
       transaction.state.log.min.isr: 2
       default.replication.factor: 3
       min.insync.replicas: 2
-      inter.broker.protocol.version: "3.2"
+      inter.broker.protocol.version: "3.5"
     listeners:
       - name: plain
         port: 9092
@@ -28,17 +28,14 @@ spec:
         type: internal
         tls: true
     storage:
-      type: jbod
-      volumes:
-        - id: 0
-          type: persistent-claim
-          size: 30Gi
-          deleteClaim: true
+      type: persistent-claim
+      size: 5Gi
+      deleteClaim: true
   zookeeper:
     replicas: 3
     storage:
       type: persistent-claim
-      size: 10Gi
+      size: 5Gi
       deleteClaim: true
   entityOperator:
     topicOperator: {}
