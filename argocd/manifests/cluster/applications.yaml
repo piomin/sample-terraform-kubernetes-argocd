@@ -24,8 +24,12 @@ metadata:
 spec:
   destination:
     server: 'https://kubernetes.default.svc'
+    namespace: metallb-system
   source:
     repoURL: 'https://metallb.github.io/metallb'
     targetRevision: 0.13.12
     chart: metallb
   project: default
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
