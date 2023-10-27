@@ -15,3 +15,17 @@ spec:
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb-helm
+  namespace: argocd
+spec:
+  destination:
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://metallb.github.io/metallb'
+    targetRevision: 0.13.12
+    chart: metallb
+  project: default
