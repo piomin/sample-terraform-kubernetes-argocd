@@ -10,7 +10,7 @@ spec:
   project: kafka
   source:
     path: argocd/manifests/kafka
-    repoURL: https://github.com/piomin/sample-terraform-kubernetes-argocd.git
+    repoURL: https://github.com/rogeriocassares/sample-terraform-kubernetes-argocd.git
     targetRevision: HEAD
   syncPolicy:
     syncOptions:
