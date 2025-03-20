@@ -3,7 +3,7 @@ version: 2.1
 executors:
   machine_executor_amd64:
     machine:
-      image: ubuntu-2204:2022.04.2
+      image: ubuntu-2204:current
     environment:
       architecture: "amd64"
       platform: "linux/amd64"
