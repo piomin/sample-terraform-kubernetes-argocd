@@ -1,5 +1,5 @@
 applications:
-  - name: cluster-config
+  cluster-config:
     namespace: argocd
     project: default
     source:
