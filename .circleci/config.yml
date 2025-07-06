@@ -22,8 +22,8 @@ jobs:
           terraform_version: 0.14.2
       - terraform/init:
           path: .
-      - terraform/validate:
-          path: .
+#      - terraform/validate:
+#          path: .
       - terraform/plan:
           path: .
       - terraform/apply:

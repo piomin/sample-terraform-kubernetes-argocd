@@ -61,6 +61,15 @@ provider "kubectl" {
   load_config_file       = false
 }
 
+provider "helm" {
+  kubernetes {
+    host                   = kind_cluster.default.endpoint
+    cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
+    client_certificate     = kind_cluster.default.client_certificate
+    client_key             = kind_cluster.default.client_key
+  }
+}
+
 data "kubectl_file_documents" "crds" {
   content = file("olm/crds.yaml")
 }
@@ -92,15 +101,6 @@ resource "kubectl_manifest" "final_apply" {
   for_each  = data.kubectl_file_documents.final.manifests
   wait      = true
   yaml_body = each.value
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = kind_cluster.default.endpoint
-    cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-    client_certificate     = kind_cluster.default.client_certificate
-    client_key             = kind_cluster.default.client_key
-  }
 }
 
 resource "time_sleep" "wait_150_seconds" {
