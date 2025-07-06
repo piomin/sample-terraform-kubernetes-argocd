@@ -8,6 +8,10 @@ terraform {
       source  = "gavinbunney/kubectl"
       version = "1.19.0"
     }
+    helm = {
+      source = "hashicorp/helm"
+      version = "3.0.2"
+    }
   }
 }
 
@@ -50,10 +54,11 @@ resource "kind_cluster" "default" {
 }
 
 provider "kubectl" {
-  host = kind_cluster.default.endpoint
+  host                   = kind_cluster.default.endpoint
   cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-  client_certificate = kind_cluster.default.client_certificate
-  client_key = kind_cluster.default.client_key
+  client_certificate     = kind_cluster.default.client_certificate
+  client_key             = kind_cluster.default.client_key
+  load_config_file       = false
 }
 
 data "kubectl_file_documents" "crds" {
@@ -61,9 +66,9 @@ data "kubectl_file_documents" "crds" {
 }
 
 resource "kubectl_manifest" "crds_apply" {
-  for_each  = data.kubectl_file_documents.crds.manifests
-  yaml_body = each.value
-  wait = true
+  for_each          = data.kubectl_file_documents.crds.manifests
+  yaml_body         = each.value
+  wait              = true
   server_side_apply = true
 }
 
@@ -74,7 +79,7 @@ data "kubectl_file_documents" "olm" {
 resource "kubectl_manifest" "olm_apply" {
   depends_on = [kubectl_manifest.crds_apply]
   for_each  = data.kubectl_file_documents.olm.manifests
-  wait = true
+  wait      = true
   yaml_body = each.value
 }
 
@@ -85,16 +90,16 @@ data "kubectl_file_documents" "final" {
 resource "kubectl_manifest" "final_apply" {
   depends_on = [kubectl_manifest.olm_apply]
   for_each  = data.kubectl_file_documents.final.manifests
-  wait = true
+  wait      = true
   yaml_body = each.value
 }
 
 provider "helm" {
   kubernetes {
-    host = kind_cluster.default.endpoint
+    host                   = kind_cluster.default.endpoint
     cluster_ca_certificate = kind_cluster.default.cluster_ca_certificate
-    client_certificate = kind_cluster.default.client_certificate
-    client_key = kind_cluster.default.client_key
+    client_certificate     = kind_cluster.default.client_certificate
+    client_key             = kind_cluster.default.client_key
   }
 }
 
