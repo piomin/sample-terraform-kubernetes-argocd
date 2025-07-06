@@ -3,13 +3,13 @@ version: 2.1
 executors:
   machine_executor_amd64:
     machine:
-      image: ubuntu-2204:2022.04.2
+      image: ubuntu-2204:current
     environment:
       architecture: "amd64"
       platform: "linux/amd64"
 
 orbs:
-  terraform: circleci/terraform@3.3.0
+  terraform: circleci/terraform@3.6.0
 
 jobs:
   deploy-k8s:
@@ -19,7 +19,7 @@ jobs:
       - terraform/install:
           arch: amd64
           os: linux
-          terraform_version: 0.14.2
+          terraform_version: 1.12.2
       - terraform/init:
           path: .
       - terraform/validate:
